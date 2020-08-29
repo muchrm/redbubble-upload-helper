@@ -1,0 +1,21 @@
+
+#root-content-ui{
+    box-sizing: border-box;
+    padding-bottom: 30px;
+    padding-top: 64px;
+    position: fixed;
+    z-index: 1000000001;
+    right: 0px !important;
+    top: 0px !important;
+    bottom: 0px !important;
+    left: 0px !important;
+    overflow: visible;
+    transition: transform 0.3s ease-in 0s;
+    width: 274px;
+}
+.popup-padded {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
