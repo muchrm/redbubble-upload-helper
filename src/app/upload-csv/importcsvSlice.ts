@@ -5,6 +5,7 @@ import { AppThunk, RootState } from '../store';
 
 export interface ImageOption {
   image: string;
+  imageFile?: File,
   title: string;
   tags: string;
   description: string;

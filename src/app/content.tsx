@@ -6,6 +6,7 @@ import "../styles/global.css";
 import { configuredStore } from "./store";
 import { Provider } from "react-redux";
 import ShowCsv from "./table-csv/TableCsv";
+import run from "./services/fastpost";
 
 // chrome.runtime.sendMessage({}, (response) => {
 //     var checkReady = setInterval(() => {
@@ -37,5 +38,22 @@ class App extends React.Component {
 const injectedContent = document.createElement("div");
 injectedContent.setAttribute("id", "root-content-ui");
 document.body.appendChild(injectedContent);
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if(message.task){
+    console.log('got task',message.task)
+    run(message.task.imageOption)
+  }
+  sendResponse({})
+})
+
+chrome.runtime.sendMessage(
+  {
+    myTask: true,
+  },
+  (response) => {
+    console.log("foreground got response", response);
+  }
+);
 
 ReactDOM.render(<App />, document.getElementById("root-content-ui"));

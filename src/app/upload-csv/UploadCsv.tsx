@@ -18,7 +18,6 @@ export default function UploadCsv() {
       // const eventTmp = new Event('change', {bubbles: true});
       // inputTmp.dispatchEvent(eventTmp);
       processFile(file).then((rows) => {
-        console.log(rows);
         dispatch(setRows(rows));
       });
     }
@@ -51,15 +50,18 @@ export default function UploadCsv() {
     return new Promise((resolve) => {
       Papa.parse(file, {
         complete: (result) => {
-          resolve(result.data.map((row:any)=>{
+          let rows = result.data.filter((row:any) => row.Title)
+          console.log(result);
+          rows = rows.map((row:any)=>{
             return {
-                imageToCpy: `${row.imageToCopy}`,
+                imageToCpy: `${row.ImageToCopy}`,
                 image: `${row.Image}`,
                 title: `${row.Title}`,
                 description: `${row.Description}`,
                 tags: `${row.Tags}`,
             }
-            }));
+            })
+          resolve(rows);
         },
         header: true,
       });
